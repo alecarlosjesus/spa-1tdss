@@ -1,0 +1,39 @@
+.table{
+    border: 2px solid #ccc;
+    border-collapse: collapse;
+    margin: auto;
+
+    .tableHeader{
+        border: 2px solid #ccc;
+        background-color: #ffe4c4;
+        text-align: center;
+    }
+
+    td{
+        border: 2px solid #ccc;
+        text-align: left;
+
+        &:first-child{
+            text-align: center;
+        }
+        &:last-child{
+            text-align: center;
+        }
+    }
+
+    tr{
+        &:nth-child(even){
+            background-color: #f0f0f0;
+        }
+
+        &:hover{
+            background-color: #444949;
+            color: #fff;
+        }
+
+    }
+
+}
+
+
+ 
