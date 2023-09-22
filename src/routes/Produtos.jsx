@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import { ListaProdutos } from "../Components/ListaProdutos"
 import  styles from "./Produtos.module.css";
 import {AiFillEdit as Editar} from "react-icons/ai";
 import {MdDeleteForever as Excluir} from "react-icons/md";
@@ -8,7 +7,6 @@ import { useEffect, useState } from "react";
 export default function Produtos() {
 
   document.title = "Lista de Produtos";
-
 
   const [counter, setCounter] = useState(0);
 
@@ -22,26 +20,22 @@ export default function Produtos() {
 
   useEffect(() => {
     console.log("useEffect será rendereizado apenas uma vez!");
-    fetch("http://localhost:5000/produtos")
-      .then((lista)=> lista.json())
-      .then((listProdutos)=>{
-          setProdutos(listProdutos);
+    fetch("http://localhost:5000/produtos",{
+      method: "GET",
+      headers:{
+        "Content-Type": "application/json"
+      }
+      })
+      .then((response)=> response.json())
+      .then((listaProdutos)=>{
+          setProdutos(listaProdutos);
       })
   
   },[]);
 
   useEffect(() => {
     console.log("useEffect será rendereizado apenas um objeto/variaável/constante que estiver no array de dependências sofrer uma atualização.!");
-
-
-
-
   },[counter2]);
-
-
-  
-
-
 
   return (
     <div>
