@@ -3,18 +3,11 @@ import  styles from "./Produtos.module.css";
 import {AiFillEdit as Editar} from "react-icons/ai";
 import {MdDeleteForever as Excluir} from "react-icons/md";
 import { useEffect, useState } from "react";
+import ModalInserir from "../Components/ModalInserir/ModalInserir";
 
 export default function Produtos() {
 
   document.title = "Lista de Produtos";
-
-  const [counter, setCounter] = useState(0);
-
-  const [counter2, setCounter2] = useState(0);
-
-  useEffect(() => {
-    console.log("useEffect será rendereizado sempre que o componente ou qualquer objeto for atualizado!");
-  });
 
   const [produtos, setProdutos] = useState([{}]);
 
@@ -33,20 +26,14 @@ export default function Produtos() {
   
   },[]);
 
-  useEffect(() => {
-    console.log("useEffect será rendereizado apenas um objeto/variaável/constante que estiver no array de dependências sofrer uma atualização.!");
-  },[counter2]);
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
         <h1>Produtos</h1>
 
-        <div>
-          <button onClick={()=> setCounter(counter + 1)}>COUNTER - {counter}</button>
-        </div>
-        <div>
-          <button onClick={()=> setCounter2(counter2 + 1)}>COUNTER2 - {counter2}</button>
-        </div>
+       {open ? <ModalInserir open={open} setOpen={setOpen} /> : "" }
+       <button onClick={()=> setOpen(true)}>OPEN - MODAL</button>
 
         <table className={styles.table}>
             <thead>
