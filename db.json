@@ -1,7 +1,24 @@
 {
-    "produtos":[
-        {"id":1, "nome":"Teclado", "preco": 150},
-        {"id":2, "nome":"Mouse", "preco": 120},
-        {"id":3, "nome":"Monitor", "preco": 950}
-    ]
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Teclado",
+      "preco": 150
+    },
+    {
+      "id": 2,
+      "nome": "Mouse",
+      "preco": 120
+    },
+    {
+      "id": 3,
+      "nome": "Monitor",
+      "preco": 950
+    },
+    {
+      "nome": "TV 14'",
+      "preco": "800",
+      "id": 4
+    }
+  ]
 }
