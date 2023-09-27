@@ -24,6 +24,11 @@
       "nome": "Cubo Mágico",
       "preco": "50",
       "id": 5
+    },
+    {
+      "nome": "",
+      "preco": "",
+      "id": 6
     }
   ]
 }

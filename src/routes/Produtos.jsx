@@ -31,7 +31,7 @@ export default function Produtos() {
       <h1>Produtos</h1>
 
       {open ? <ModalInserir open={open} setOpen={setOpen} /> : ""}
-      <button onClick={() => setOpen(true)}>OPEN - MODAL</button>
+      <Link onClick={() => setOpen(true)}>Add-Produto</Link>
 
       <table className={styles.table}>
         <thead>
