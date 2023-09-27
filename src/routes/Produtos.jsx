@@ -1,66 +1,75 @@
-import { Link } from "react-router-dom"
-import  styles from "./Produtos.module.css";
-import {AiFillEdit as Editar} from "react-icons/ai";
-import {MdDeleteForever as Excluir} from "react-icons/md";
+import { Link } from "react-router-dom";
+import styles from "./Produtos.module.css";
+import { AiFillEdit as Editar } from "react-icons/ai";
+import { MdDeleteForever as Excluir } from "react-icons/md";
 import { useEffect, useState } from "react";
 import ModalInserir from "../Components/ModalInserir/ModalInserir";
 
 export default function Produtos() {
-
   document.title = "Lista de Produtos";
 
   const [produtos, setProdutos] = useState([{}]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect será rendereizado apenas uma vez!");
-    fetch("http://localhost:5000/produtos",{
-      method: "GET",
-      headers:{
-        "Content-Type": "application/json"
-      }
+    if (!open) {
+      fetch("http://localhost:5000/produtos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .then((response)=> response.json())
-      .then((listaProdutos)=>{
+        .then((response) => response.json())
+        .then((listaProdutos) => {
           setProdutos(listaProdutos);
-      })
-  
-  },[]);
-
-  const [open, setOpen] = useState(false);
+        });
+    }
+  }, [open]);
 
   return (
     <div>
-        <h1>Produtos</h1>
+      <h1>Produtos</h1>
 
-       {open ? <ModalInserir open={open} setOpen={setOpen} /> : "" }
-       <button onClick={()=> setOpen(true)}>OPEN - MODAL</button>
+      {open ? <ModalInserir open={open} setOpen={setOpen} /> : ""}
+      <button onClick={() => setOpen(true)}>OPEN - MODAL</button>
 
-        <table className={styles.table}>
-            <thead>
-            <tr>
-                <th className={styles.tableHeader}>ID</th>
-                <th className={styles.tableHeader}>NOME</th>
-                <th className={styles.tableHeader}>PREÇO</th>
-                <th className={styles.tableHeader}>EDITAR / EXCLUIR</th>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th className={styles.tableHeader}>ID</th>
+            <th className={styles.tableHeader}>NOME</th>
+            <th className={styles.tableHeader}>PREÇO</th>
+            <th className={styles.tableHeader}>EDITAR / EXCLUIR</th>
+          </tr>
+        </thead>
+        <tbody>
+          {produtos.map((produto, indice) => (
+            <tr key={indice}>
+              <td>{produto.id}</td>
+              <td>{produto.nome}</td>
+              <td>{produto.preco}</td>
+              <td>
+                <Link to={`/editar/produtos/${produto.id}`}>
+                  {" "}
+                  <Editar />{" "}
+                </Link>{" "}
+                |{" "}
+                <Link to={`/excluir/produtos/${produto.id}`}>
+                  {" "}
+                  <Excluir />{" "}
+                </Link>
+              </td>
             </tr>
-            </thead>
-            <tbody>
-            {produtos.map((produto,indice)=>(
-                 <tr key={indice}>
-                    <td>{produto.id}</td>
-                    <td>{produto.nome}</td>
-                    <td>{produto.preco}</td>
-                    <td><Link to={`/editar/produtos/${produto.id}`}> <Editar/> </Link> | <Link to={`/excluir/produtos/${produto.id}`}> <Excluir/> </Link></td>
-                 </tr>
-            ))}
+          ))}
         </tbody>
         <tfoot>
-        <tr>
-           <td colSpan={4} style={{textAlign:"center"}}>PRODUTOS</td>
-        </tr>
+          <tr>
+            <td colSpan={4} style={{ textAlign: "center" }}>
+              PRODUTOS
+            </td>
+          </tr>
         </tfoot>
-        </table>
-        
+      </table>
     </div>
-  )
+  );
 }

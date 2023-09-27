@@ -67,7 +67,6 @@ const handleSubmit = (e)=>{
   props.setOpen(false)
 };
 
-
   if (props.open) {
     return (
       <div className="container">
