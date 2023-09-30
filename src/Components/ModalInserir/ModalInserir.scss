@@ -15,9 +15,30 @@
     }
 
     .btnClose {
-        border: 0 solid #fff;
-        position: fixed;
-        left: 90%;
+        float: right;
+        font-weight: bold;
+        font-size: 2rem;
+        color: #000000;
+        background-color: #fff;
+        border-radius: 50%;
+        width: 3.7%;
+        text-align: center;
+        border: 2px solid #000000;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 300ms, color 300ms;
+
+        &:hover{
+            background-color: #000000;
+            color: #fff;
+            border-color: #fff
+        }
+
+        &:active{
+            background-color: #e40909;
+            border-color: #fff
+        }
+
     }
 
     form {
