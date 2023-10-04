@@ -33,6 +33,38 @@ export default function Produtos() {
     setOpen(true);
   };
 
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/produtos/${id}`, {
+      method: "DELETE"
+    })
+    .then((response)=> {
+
+      fetch("http://localhost:5000/produtos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((listaProdutos) => {
+          setProdutos(listaProdutos);
+        });fetch("http://localhost:5000/produtos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((listaProdutos) => {
+          setProdutos(listaProdutos);
+        });
+
+    })
+    .catch(error=>console.log(error))
+
+  }
+
+
   return (
     <div>
       <h1>Produtos</h1>
@@ -70,7 +102,7 @@ export default function Produtos() {
                   <Editar />{" "}
                 </Link>{" "}
                 |{" "}
-                <Link to={`/excluir/produtos/${produto.id}`}>
+                <Link onClick={()=> handleDelete(produto.id)} >
                   {" "}
                   <Excluir />{" "}
                 </Link>
