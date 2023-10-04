@@ -3,13 +3,14 @@ import styles from "./Produtos.module.css";
 import { AiFillEdit as Editar } from "react-icons/ai";
 import { MdDeleteForever as Excluir } from "react-icons/md";
 import { useEffect, useState } from "react";
-import ModalInserir from "../Components/ModalInserir/ModalInserir";
+import ModalAction from "../Components/ModalAction/ModalAction";
 
 export default function Produtos() {
   document.title = "Lista de Produtos";
 
   const [produtos, setProdutos] = useState([{}]);
   const [open, setOpen] = useState(false);
+  const [id, setId] = useState(0);
 
   useEffect(() => {
     if (!open) {
@@ -24,13 +25,28 @@ export default function Produtos() {
           setProdutos(listaProdutos);
         });
     }
+    setId(0);
   }, [open]);
+
+  const handleUpdate = (id) => {
+    setId(id);
+    setOpen(true);
+  };
 
   return (
     <div>
       <h1>Produtos</h1>
 
-      {open ? <ModalInserir open={open} setOpen={setOpen} /> : ""}
+      {open ? (
+        <ModalAction
+          open={open}
+          setOpen={setOpen}
+          idEditar={id}
+          setId={setId}
+        />
+      ) : (
+        ""
+      )}
       <Link onClick={() => setOpen(true)}>Add-Produto</Link>
 
       <table className={styles.table}>
@@ -49,7 +65,7 @@ export default function Produtos() {
               <td>{produto.nome}</td>
               <td>{produto.preco}</td>
               <td>
-                <Link to={`/editar/produtos/${produto.id}`}>
+                <Link onClick={() => handleUpdate(produto.id)}>
                   {" "}
                   <Editar />{" "}
                 </Link>{" "}

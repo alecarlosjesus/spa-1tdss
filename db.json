@@ -2,7 +2,7 @@
   "produtos": [
     {
       "id": 1,
-      "nome": "Teclado",
+      "nome": "Teclado Mecânico",
       "preco": 150
     },
     {
@@ -12,11 +12,11 @@
     },
     {
       "id": 3,
-      "nome": "Monitor",
+      "nome": "Monitor 32`",
       "preco": 950
     },
     {
-      "nome": "TV 14'",
+      "nome": "TV 32",
       "preco": "800",
       "id": 4
     },
